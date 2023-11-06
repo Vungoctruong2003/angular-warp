@@ -1,0 +1,70 @@
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+             class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <h1>Trang đăng kí</h1>
+        <form [formGroup]="formRegister" (ngSubmit)="register()">
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" name="email" class="form-control form-control-lg" formControlName="email"
+                   placeholder="Nhập email"/>
+
+            <div *ngIf="(email.dirty || email.touched) && email.errors" class="alert alert-danger">
+              <div *ngIf="email.errors?.['required']">
+                {{messageValidate.required}}
+              </div>
+              <div *ngIf="email.errors?.['email']">
+                {{messageValidate.email}}
+              </div>
+            </div>
+            <label class="form-label">Email</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" name="password" class="form-control form-control-lg" formControlName="password"
+                   placeholder="Nhập mật khẩu"/>
+            <div *ngIf="(password.dirty || password.touched) && password.errors" class="alert alert-danger">
+              <div *ngIf="password.errors?.['required']">
+                {{messageValidate.required}}
+              </div>
+            </div>
+            <label class="form-label">Mật khẩu</label>
+          </div>
+          <div class="form-outline mb-3">
+            <input type="text" class="form-control form-control-lg" formControlName="phone"
+                   placeholder="Nhập số điện thoại"/>
+            <div *ngIf="(phone.dirty || phone.touched) && phone.errors" class="alert alert-danger">
+              <div *ngIf="phone.errors?.['required']">
+                {{messageValidate.required}}
+              </div>
+            </div>
+            <label class="form-label">Số điện thoại</label>
+          </div>
+          <div class="form-outline mb-3">
+            <input type="text" class="form-control form-control-lg" formControlName="name"
+                   placeholder="Nhập tên"/>
+            <div *ngIf="(name.dirty || name.touched) && name.errors" class="alert alert-danger">
+              <div *ngIf="name.errors?.['required']">
+                {{messageValidate.required}}
+              </div>
+            </div>
+            <label class="form-label">Tên</label>
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng kí
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

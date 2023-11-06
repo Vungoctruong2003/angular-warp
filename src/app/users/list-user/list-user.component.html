@@ -1,0 +1,39 @@
+<h1>Danh sách người dùng</h1>
+
+<app-search (searchEvent)="search($event)"></app-search>
+
+<table class="table mt-5">
+  <thead>
+  <tr>
+    <th scope="col">STT</th>
+    <th scope="col">Tên</th>
+    <th scope="col">Email</th>
+    <th scope="col">Quyền</th>
+    <th scope="col">Hành động</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users; index as i">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{user.name}}</td>
+    <td>{{user.email}}</td>
+    <td data-toggle="modal" data-target="#editRole" (click)="selectSetRoleUser(user._id)">{{user.role_name}}</td>
+    <td>
+      <button type="button" class="btn btn-primary" data-toggle="modal" (click)="selectEditUser(user._id)"
+              data-target="#editUser">Sửa
+      </button>
+
+      <app-edit-user *ngIf="showEditUserComponent && selectedUserId === user._id" [id]="user._id"
+                     (editUserEvent)="editUser($event)"></app-edit-user>
+
+      <button type="button" class="btn btn-danger" (click)="deleteUser(user._id)">Xoá</button>
+    </td>
+    <app-set-role *ngIf="showSetRoleUserComponent && selectedSetRoleUserId === user._id"
+                  [userIdSelected]="user._id" (setRoleUserEvent)="setRoleUser($event)"></app-set-role>
+  </tr>
+  </tbody>
+</table>
+
+<app-paginator [currentPage]="currentPage" [totalPage]="totalPage" (toPageEvent)="toPage($event)"
+               (toPerPageEvent)="toPerPage($event)"></app-paginator>
+

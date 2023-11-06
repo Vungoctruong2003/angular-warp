@@ -1,0 +1,32 @@
+<nav aria-label="Page navigation example" class="pagination justify-content-end">
+  <div style="display: inline-block; vertical-align: middle; margin-right: 10px;">
+
+    <select class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+            [(ngModel)]="selectedPerPage"
+            (change)="toPerPage(selectedPerPage)">
+      <option *ngFor="let perPage of optionPerPages" [value]="perPage">{{perPage}}</option>
+    </select>
+  </div>
+
+  <ul class="pagination">
+    <li [ngClass]="{'page-item': true, 'disabled': currentPage <= 1}"
+        (click)="currentPage > 1 ? toPage(currentPage - 1) : null">
+      <a class="page-link" type="button" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    <li *ngFor="let page of pages; index as i" class="page-item">
+      <a [ngClass]="{'page-link': true ,'active': page === currentPage}" type="button"
+         (click)="toPage(page)">{{page}}</a>
+    </li>
+
+    <li [ngClass]="{'page-item': true, 'disabled': currentPage >= totalPage}"
+        (click)="currentPage < totalPage ? toPage(currentPage + 1) : null">
+      <a class="page-link" type="button" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

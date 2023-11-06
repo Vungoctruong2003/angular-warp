@@ -1,0 +1,51 @@
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+             class="img-fluid" alt="Sample image">
+      </div>
+
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <h1>Trang đăng nhập</h1>
+        <form [formGroup]="formLogin" (ngSubmit)="login()">
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" name="email" class="form-control form-control-lg" formControlName="email"
+                   placeholder="Enter a valid email address"/>
+
+            <div *ngIf="(email.dirty || email.touched) && email.errors" class="alert alert-danger">
+              <div *ngIf="email.errors?.['required']">
+                {{messageValidate.required}}
+              </div>
+              <div *ngIf="email.errors?.['email']">
+                {{messageValidate.email}}
+              </div>
+            </div>
+            <label class="form-label">Email address</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" name="password" class="form-control form-control-lg" formControlName="password"
+                   placeholder="Enter password"/>
+            <div *ngIf="(password.dirty || password.touched) && password.errors" class="alert alert-danger">
+              <div *ngIf="password.errors?.['required']">
+                {{messageValidate.required}}
+              </div>
+            </div>
+            <label class="form-label">Password</label>
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng nhập
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

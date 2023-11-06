@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-5">
+    <h1>Danh sách quyền</h1>
+  </div>
+  <div class="col-md-7 text-right">
+    <button type="button" class="btn btn-primary" data-toggle="modal" (click)="showCreateModel()" data-target="#createRole">Thêm mới</button>
+  </div>
+</div>
+<app-create-role *ngIf="showCreateRoleComponent" (createRoleEvent)="create($event)"></app-create-role>
+
+<table class="table mt-5">
+  <thead>
+  <tr>
+    <th scope="col">STT</th>
+    <th scope="col">Tên</th>
+    <th scope="col">Hành động</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let role of roles; index as i">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{role.name}}</td>
+    <td>
+      <button type="button" class="btn btn-primary" data-toggle="modal" (click)="selectEditRole(role._id)"
+              data-target="#editRole">Sửa
+      </button>
+
+      <app-edit-role *ngIf="showEditRoleComponent && selectedRoleId === role._id" [id]="role._id"
+                     (editRoleEvent)="edit($event)"></app-edit-role>
+
+      <button type="button" class="btn btn-danger" (click)="delete(role._id)">Xoá</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
