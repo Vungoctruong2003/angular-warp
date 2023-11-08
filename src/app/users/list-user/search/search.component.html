@@ -1,6 +1,20 @@
 <div class="input-group justify-content-end" style="max-width: 400px; margin-left: auto;">
-  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-         [(ngModel)]="searchTerm" name="searchTerm"
-         aria-describedby="search-addon"/>
-  <button type="button" class="btn btn-outline-primary" (click)="search()">search</button>
+
+  <div class="search-role ml-auto" style="display: flex; align-items: center;">
+    <span>Role</span>
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="roleSelectSearch"
+            (change)="searchRole()">
+      <option selected value="">Tất cả</option>
+      <option *ngFor=" let role of roles" value="{{role._id}}">{{role.name}}</option>
+    </select>
+  </div>
+
+  <div class="search-text ms-2" style="display: flex; align-items: center;">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+           [(ngModel)]="searchTerm" name="searchTerm"
+           aria-describedby="search-addon"/>
+    <button type="button" class="btn btn-outline-primary" (click)="search()">search</button>
+  </div>
+
+
 </div>

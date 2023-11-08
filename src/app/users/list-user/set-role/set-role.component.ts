@@ -77,14 +77,10 @@ export class SetRoleComponent implements OnInit {
 
   setRoleForUser() {
     this.userService.setRoleUser(this._userIdSelected, this.formSetRole.value.roles).subscribe(res => {
-
         this.setRoleUserEvent.emit(res);
         this.toastr.success('Cập nhật thành công', 'Success');
       },
       error => {
-        if (error.status == 403) {
-          this.refreshTokenHelper.refreshToken()
-        }
         this.toastr.error('Bạn không phải admin', 'Error');
       }
     )

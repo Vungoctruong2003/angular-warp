@@ -18,25 +18,31 @@ export class IsAdminService implements CanActivate {
   ) {
   }
 
-  canActivate(): boolean {
-    this.authService.getMe().subscribe(res => {
-      this.myRole = res.data.roles;
-    }, error => {
-      if (error.status == 403) {
-        this.refreshTokenHelper.refreshToken()
-      }
-    });
+  async canActivate(): Promise<boolean> {
+    try {
+      const res = await this.authService.getMe().toPromise();
 
-    if (!this.myRole) {
-      this.toastr.error('Admin mới có thể truy cập', 'Error');
+      this.myRole = res.data.role_users;
+
+      if (this.myRole.length == 0) {
+        this.toastr.error('Admin mới có thể truy cập', 'Error');
+        return false;
+      }
+
+      const containsAdmin = this.myRole.some((item: { name: string; }) => item.name === "admin");
+      if (!containsAdmin) {
+        this.toastr.error('Admin mới có thể truy cập', 'Error');
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      // @ts-ignore
+      if (error.status === 403) {
+        this.refreshTokenHelper.refreshToken();
+      }
       return false;
     }
-    // @ts-ignore
-    const containsAdmin = this.myRole.some(item => item.name === "admin");
-    if (!containsAdmin) {
-      this.toastr.error('Admin mới có thể truy cập', 'Error');
-      return false
-    }
-    return true;
+
   }
 }

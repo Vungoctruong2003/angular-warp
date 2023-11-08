@@ -13,7 +13,7 @@
           <div class="form-group">
             <label>Quyền</label>
             <select class="form-select" multiple aria-label="multiple select example" formControlName="roles">
-              <option *ngFor=" let role of roles" [selected]="isRoleSelected(role)" [value]="role"
+              <option *ngFor=" let role of roles" [selected]="isRoleSelected(role)" [value]="role._id"
               >{{role.name}}</option>
             </select>
           </div>

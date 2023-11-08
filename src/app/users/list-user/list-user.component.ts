@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../service/user/user.service";
 import {ToastrService} from "ngx-toastr";
-import {RoleService} from "../../service/role/role.service";
-import {FormBuilder, Validators} from "@angular/forms";
-import {AuthService} from "../../service/auth/auth.service";
 import {RefreshTokenService} from "../../helpers/refresh-token.service";
 
 @Component({
@@ -18,7 +15,8 @@ export class ListUserComponent implements OnInit {
   queryParam: object = {
     perPage: 10,
     page: 1,
-    keySearch: ''
+    keySearch: '',
+    roleSearch: '',
   }
   selectedUserId?: string
   showEditUserComponent: boolean = false
@@ -35,7 +33,6 @@ export class ListUserComponent implements OnInit {
     this.selectedSetRoleUserId = userId;
     this.showSetRoleUserComponent = true;
   }
-
 
   constructor(
     private userService: UserService,
@@ -63,6 +60,12 @@ export class ListUserComponent implements OnInit {
   search(keyword: string) {
     // @ts-ignore
     this.queryParam.keySearch = keyword;
+    this.getUsers(this.queryParam)
+  }
+
+  searchRole(idRole: string) {
+    // @ts-ignore
+    this.queryParam.roleSearch = idRole;
     this.getUsers(this.queryParam)
   }
 

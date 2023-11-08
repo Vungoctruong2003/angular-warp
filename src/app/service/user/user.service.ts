@@ -17,7 +17,7 @@ export class UserService extends BaseService {
 
   getAllUser(queryParam: object): Observable<any> {
     // @ts-ignore
-    let queryString = '?perpage=' + queryParam.perPage + '&page=' + queryParam.page + '&keySearch=' + queryParam.keySearch;
+    let queryString = '?perpage=' + queryParam.perPage + '&page=' + queryParam.page + '&keySearch=' + queryParam.keySearch + '&roleSearch=' + queryParam.roleSearch;
     return this.http.get(API_DOMAIN + USER_PATH_PREFIX + queryString, {headers: this.headers})
   }
 

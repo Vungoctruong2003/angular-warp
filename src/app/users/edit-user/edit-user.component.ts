@@ -55,8 +55,12 @@ export class EditUserComponent implements OnInit {
 
   editUser() {
     this.userService.editUser(this._id, this.formEdit.value).subscribe(res => {
-      this.editUserEvent.emit(res.data);
-      this.toastr.success('Cập nhật thành công', 'Success');
+      if (!res.data._id) {
+        this.toastr.error('Email đã tồn tại tron hệ thống', 'Error');
+      } else {
+        this.editUserEvent.emit(res.data);
+        this.toastr.success('Cập nhật thành công', 'Success');
+      }
     }, error => {
       if (error.status == 403) {
         this.refreshTokenHelper.refreshToken()
